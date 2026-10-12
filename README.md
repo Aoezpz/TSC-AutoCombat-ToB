@@ -43,18 +43,31 @@ The tool opens by itself when you enter the world. If you close it, type `/ac`.
 
 ---
 
+## The window
+
+Down the left side are five sections: **Fight**, **Rules**, **Boxes**,
+**Setup** and **Help** (`/ac fight`, `/ac rules`, `/ac boxes`, `/ac setup`
+jump straight there). Across the top is one status strip: START / PAUSE, Burn,
+your mode, your three classes, and three dots for **Nav**, **Mesh** and
+**Move**. A red dot has its fix button right next to it. **Play** shrinks
+everything to a small panel for while you fight; its **Full** button brings
+the window back.
+
+---
+
 ## First run
 
-1. **Check your classes.** The header shows the three it detected, each in its
-   house color — melee red, priest silver, caster blue. It reads them from your
-   Inventory window (`NEC/WIZ/MAG`). Wrong or only one? Re-detect under
-   **Settings → General**.
-2. **Set up what to cast.** Work through the tabs: **Spell Gems**, **Abilities**,
-   **AAs**, **Discs**, **Clickies**. Each entry gets a plain rule for when to
-   fire — *Target HP below 90%*, *My HP below 40%*, *Missing buff*, *Always*.
-   **Import Bar** on the Spell Gems tab fills the list from whatever you have
-   memorized.
-3. **Pick a mode** on the **Control** tab and press **START**.
+1. **Check your classes.** The status strip shows the three it detected, each
+   in its house color — melee red, priest silver, caster blue. It reads them
+   from your Inventory window (`NEC/WIZ/MAG`). Wrong or only one? Re-detect
+   under **Setup → General**.
+2. **Set up what to cast.** Open **Rules**. The buttons along the top switch
+   between **Spells**, **Abilities**, **AAs**, **Discs** and **Clickies**. Each
+   rule reads as one line — *Flame Lick, on target, target HP under 90%* — and
+   its **>** opens the settings for that rule. **Import Bar** on Spells fills
+   the list from whatever you have memorized; on the other lists, tick what you
+   want and its settings open.
+3. **Pick a mode** under **Fight** (six tiles) and press **START**.
 
 Your setup saves itself to `config\` and reloads next time. One file per
 character, so boxes never overwrite each other.
@@ -72,7 +85,7 @@ character, so boxes never overwrite each other.
 | **Assist · Camp** | Boxed, holding a spot | Stays at camp, fights what comes in. |
 | **Assist · Backline** | Boxed healers and casters | Holds at range, never walks into melee. |
 
-Set the main assist with `/ac ma <name>` or on the Control tab. **Combat style**
+Set the main assist with `/ac ma <name>` or under Fight. **Combat style**
 (`/ac style melee|ranged|spell`) decides whether you close to melee, shoot a
 bow, or stand off and only cast.
 
@@ -94,7 +107,8 @@ bow, or stand off and only cast.
 | `/ac style melee\|ranged\|spell` | Set combat style |
 | `/ac wp add` / `/ac wp clear` | Add a patrol waypoint here / clear the route |
 | `/ac net <all\|zone\|group\|Name> <command>` | Run a command on your other boxes |
-| `/ac compact` | Shrink to the mini strip |
+| `/ac fight`, `/ac rules`, `/ac boxes`, `/ac setup` | Open that section of the window |
+| `/ac compact` | Switch between the full window and the Play panel |
 | `/ac scale 1.25` | Make every window bigger or smaller |
 | `/ac status` | Print what the bot is doing |
 | `/tscacrun` | Start / pause — bind this to a key |
@@ -108,8 +122,8 @@ bow, or stand off and only cast.
 Your characters on one PC talk to each other over MacroQuest Actors — nothing
 extra to install. Assist boxes follow the main assist's real target, two
 pullers stay off each other's mobs, boxes count as allies for buff requests,
-and `/ac net all burn on` runs a command on every one of them. Settings live
-under **Settings → Box Network**.
+and `/ac net all burn on` runs a command on every one of them. Its settings
+are under **Boxes**.
 
 ---
 
@@ -118,17 +132,19 @@ under **Settings → Box Network**.
 - **TSC windows draw on top of EverQuest's windows** while MacroQuest is
   loaded. Harmless; a fix belongs in the TSC client.
 - **Navmeshes** come from the RoF2 era. A zone with no mesh, or one whose
-  map changed, will not path — the **Status** tab tells you.
+  map changed, will not path — the **Mesh** dot turns red.
 
 ---
 
 ## When something goes wrong
 
-- **Not moving or pulling?** Check the **Status** tab. It shows whether MQ2Nav
-  and MQ2MoveUtils are loaded and whether the zone has a navmesh, with buttons
-  to load or reload them. No navmesh is the usual answer — see step 3 above.
+- **Not moving or pulling?** Look at the three dots top right: **Nav** (MQ2Nav
+  loaded), **Mesh** (this zone has a navmesh), **Move** (MQ2MoveUtils loaded).
+  A red one has its Load or Reload button beside it. No navmesh is the usual
+  answer — see Install step 3. More detail is under **Fight → Diagnostics**.
 - **Stuck on terrain?** It remembers where it got stuck and routes around it
-  next time. Clear those spots under **Settings → Navigation**.
+  next time. Clear those spots under **Setup → General → Navigation & Hazard
+  Avoidance**.
 - **Reporting a bug:** turn on **Log To File** (`/ac log on`), and when it
   happens run `/ac dump`. Attach the files from the `Logs\` folder. `/ac debug`
   prints extra detail to chat.
